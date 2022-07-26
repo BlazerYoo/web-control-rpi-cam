@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAMERA</title>
+    <!--<link rel="stylesheet" href='../static/style.css' />-->
+    <style>
+        body {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>CAMERA</h1>
+    <h3><img src="{{ url_for('video_feed') }}" width="80%"></h3>
+
+    <hr>
+
+    <form method="post" id="todo-form">
+        <button type="button" value="up">up</button>
+        <button type="button" value="down">down</button>
+        <button type="button" value="left">left</button>
+        <button type="button" value="right">right</button>
+    </form>
+
+    <hr>
+
+    <!--Jquery Cdn -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $('button').click(function () {
+            let dir = $(this).val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/',
+                data: {
+                    direction: dir
+                },
+                success: function () {
+                    console.log('sent');
+                }
+            })
+        });
+    </script>
+</body>
+
+</html>
