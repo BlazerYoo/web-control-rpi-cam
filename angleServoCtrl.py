@@ -1,17 +1,10 @@
-#!/usr/bin/env python
-#
-#  Angle Servo Control 
-#  Execute with parameter ==> sudo python3 servoCtrl.py <servo GPIO> <servo_angle> 
-#
-#  MJRoBot.org 01Feb18
-  
 from time import sleep
 import RPi.GPIO as GPIO
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 def setServoAngle(servo, angle, a, b):
-	assert angle >=30 and angle <= 150
 	pwm = GPIO.PWM(servo, 50)
 	pwm.start(8)
 	dutyCycle = angle * (b-a) / 180 + a
