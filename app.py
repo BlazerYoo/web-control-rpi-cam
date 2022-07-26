@@ -1,5 +1,5 @@
 import os
-from tiem import sleep
+from time import sleep
 from flask import Flask, render_template, request, Response
 from markupsafe import escape
 from camera_pi import Camera
