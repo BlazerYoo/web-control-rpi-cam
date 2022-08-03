@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+ 
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAMERA</title>
+</head>
+ 
+<body>
+    <hr>
+
+    <img id="feed" width="80%">
+
+    <hr>
+
+    <button id="up">up</button>
+    <button id="down">down</button>
+    <button id="left">left</button>
+    <button id="right">right</button>
+
+    <hr>
+
+    <!--Jquery Cdn -->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+
+    <script>
+
+        // Listen to websocket server + setup video streaming
+        const ip = prompt("IP:");
+        const port = prompt("PORT:");
+        const address = 'ws://' + ip + ':' + port
+        const socket = new WebSocket(address);
+
+        $('#feed').attr("src", "http://" + ip + "/video_feed")
+    
+        // On open new client
+        socket.addEventListener('open', function (event) {
+            socket.send('Connection Established');
+        });
+        
+        // Receive messages
+        socket.addEventListener('message', function (event) {
+            console.log(event.data);
+        });
+    
+        let interval = 100;
+        let timeout = 0;
+        let counter = 0;
+        $('#up').mousedown(function () {
+            timeout = setInterval(function () {
+                counter += 1;
+                console.log("holding " + counter);
+                socket.send("UP");
+            }, interval);
+        });
+
+        $('#down').mousedown(function () {
+            timeout = setInterval(function () {
+                counter += 1;
+                console.log("holding " + counter);
+                socket.send("DOWN");
+            }, interval);
+        });
+
+        $('#left').mousedown(function () {
+            timeout = setInterval(function () {
+                counter += 1;
+                console.log("holding " + counter);
+                socket.send("LEFT");
+            }, interval);
+        });
+
+        $('#right').mousedown(function () {
+            timeout = setInterval(function () {
+                counter += 1;
+                console.log("holding " + counter);
+                socket.send("RIGHT");
+            }, interval);
+        });
+
+        $(document).mouseup(function () {
+            clearInterval(timeout);
+            counter = 0;
+            return false;
+        });
+     
+    </script>
+</body>
+ 
+</html>
