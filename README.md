@@ -8,3 +8,7 @@ https://www.geeksforgeeks.org/flask-form-submission-without-page-reload/
 https://stackoverflow.com/questions/21825777/how-to-get-button-value-by-ajax
 
 https://github.com/garyexplains/examples/tree/master/servo
+
+https://websockets.readthedocs.io/en/stable/intro/tutorial1.html
+
+https://www.piesocket.com/blog/python-websocket
