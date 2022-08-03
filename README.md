@@ -12,3 +12,7 @@ https://github.com/garyexplains/examples/tree/master/servo
 https://websockets.readthedocs.io/en/stable/intro/tutorial1.html
 
 https://www.piesocket.com/blog/python-websocket
+
+https://picamera.readthedocs.io/en/release-1.13/api_camera.html
+
+https://picamera.readthedocs.io/en/release-1.13/fov.html
