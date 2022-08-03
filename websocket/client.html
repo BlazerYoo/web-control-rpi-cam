@@ -16,10 +16,10 @@
 
     <hr>
 
-    <button id="up">up</button>
-    <button id="down">down</button>
-    <button id="left">left</button>
-    <button id="right">right</button>
+    <button id="up" onclick="up()">up</button>
+    <button id="down" onclick="down()">down</button>
+    <button id="left" onclick="left()">left</button>
+    <button id="right" onclick="right()">right</button>
 
     <hr>
 
@@ -46,6 +46,22 @@
             console.log(event.data);
         });
     
+        function up() {
+            socket.send("UP");
+        }
+
+        function down() {
+            socket.send("DOWN");
+        }
+
+        function left() {
+            socket.send("LEFT");
+        }
+
+        function right() {
+            socket.send("RIGHT");
+        }
+        
         let interval = 100;
         let timeout = 0;
         let counter = 0;
