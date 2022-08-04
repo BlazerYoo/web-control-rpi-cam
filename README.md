@@ -2,7 +2,7 @@
 
 Use Websockets for low pan-and-tilt servo latency with Raspberry Pi camera streaming
 
-## Adapted from
+## Credits
 
 `camera_pi.py` from https://medium.com/@rovai/raspberry-pi-cam-pan-tilt-controlled-over-local-internet-49ecad3a5ee8
 
