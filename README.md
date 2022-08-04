@@ -3,18 +3,9 @@
 Use Websockets for low pan-and-tilt servo latency with Raspberry Pi camera streaming
 
 ## Adapted from
-https://medium.com/@rovai/raspberry-pi-cam-pan-tilt-controlled-over-local-internet-49ecad3a5ee8
 
-https://www.geeksforgeeks.org/flask-form-submission-without-page-reload/
+`camera_pi.py` from https://medium.com/@rovai/raspberry-pi-cam-pan-tilt-controlled-over-local-internet-49ecad3a5ee8
 
-https://stackoverflow.com/questions/21825777/how-to-get-button-value-by-ajax
+Setting up servo in `app_move.py` adapted from https://github.com/garyexplains/examples/blob/master/servo/sweep0.py
 
-https://github.com/garyexplains/examples/tree/master/servo
-
-https://websockets.readthedocs.io/en/stable/intro/tutorial1.html
-
-https://www.piesocket.com/blog/python-websocket
-
-https://picamera.readthedocs.io/en/release-1.13/api_camera.html
-
-https://picamera.readthedocs.io/en/release-1.13/fov.html
+Python websocket in `app_move.py` and `client.html` adapted from https://websockets.readthedocs.io/en/stable/intro/tutorial1.html and https://www.piesocket.com/blog/python-websocket
