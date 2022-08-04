@@ -44,12 +44,15 @@ async def handler(websocket):
             else:
                 panServoAngle += interval
             panServo.value = panServoAngle
-        else:
+        elif 'right' in message.lower():
             if (panServoAngle - interval) <= -1:
                 panServoAngle = -1
             else:
                 panServoAngle -= interval
             panServo.value = panServoAngle
+        elif 'power' in message.lower():
+            await websocket.send("POWERING OFF...")
+            os.system("sudo shutdown -h now")
             
         #print("PAN:", panServoAngle, "TILT:", tiltServoAngle)
         

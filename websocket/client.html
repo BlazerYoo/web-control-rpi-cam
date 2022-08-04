@@ -23,6 +23,10 @@
 
     <hr>
 
+    <button id="power" onclick="power()">Power</button>
+
+    <hr>
+
     <!--Jquery Cdn -->
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 
@@ -60,6 +64,10 @@
 
         function right() {
             socket.send("RIGHT");
+        }
+
+        function power() {
+            socket.send("POWER");
         }
         
         let interval = 100;
