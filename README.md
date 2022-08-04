@@ -1,6 +1,18 @@
 # web control rpi cam
 
-Use Websockets for low pan-and-tilt servo latency with Raspberry Pi camera streaming
+Websockets for low pan-and-tilt servo latency with Raspberry Pi camera streaming
+
+## Usage
+
+Run `git clone https://github.com/BlazerYoo/file2img.git` or [download](https://github.com/BlazerYoo/web-control-rpi-cam/archive/refs/heads/main.zip) repo.
+
+Run `pip install -r requirements.txt` to install dependencies.
+
+Run `sudo python appV2.py`
+
+Run `python app_move.py`
+
+Open `client.html` on a browser on device in same local network as your Raspberry Pi
 
 ## Credits
 
