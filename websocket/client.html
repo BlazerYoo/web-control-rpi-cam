@@ -139,16 +139,18 @@
                 $('#light').text("LED is OFF");
             } else {
                 console.log("send: LUMIN " + slider.value);
-                socket.send("LUMIN: ", slider.value)
+                socket.send("LUMIN: " + slider.value);
                 $('#light').text("LED is ON");
             }
             ledOn = !ledOn;
         }
 
         slider.oninput = function () {
-            output.innerHTML = this.value;
-            if (document.getElementById("lumin").innerText == "LED is ON") {
-                socket.send("LUMIN: ", this.value)
+            output.innerHTML = slider.value;
+            console.log(document.getElementById("light").innerText)
+            if (document.getElementById("light").innerText == "LED is ON") {
+                console.log("LED is ON and change lumin to " + slider.value);
+                socket.send("LUMIN: " + slider.value);
             }
         }
 
