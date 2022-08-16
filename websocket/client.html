@@ -23,6 +23,10 @@
 
     <hr>
 
+    <button id="light" onclick="toggleLight()">Light</button>
+
+    <hr>
+
     <button id="power" onclick="power()">Power</button>
 
     <hr>
@@ -49,6 +53,10 @@
         socket.addEventListener('message', function (event) {
             console.log(event.data);
         });
+
+        // Set up light toggle inner text
+        $('#light').text("LED OFF");
+        let ledOn = false;
     
         function up() {
             socket.send("UP");
@@ -68,6 +76,17 @@
 
         function power() {
             socket.send("POWER");
+        }
+
+        function toggleLight() {
+            if (ledOn) {
+                socket.send("LEDon");
+                $('#light').text("LED OFF");
+            } else {
+                socket.send("LEDoff");
+                $('#light').text("LED ON");
+            }
+            ledOn = !ledOn;
         }
         
         let interval = 100;

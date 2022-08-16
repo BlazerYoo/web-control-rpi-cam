@@ -12,6 +12,8 @@ Run `sudo python appV2.py`
 
 Run `python app_move.py`
 
+Or edit `/home/pi/.bashrc` and add `sudo python appV2.py & python app_move.py`
+
 Open `client.html` on a browser on device in same local network as your Raspberry Pi
 
 ## Credits

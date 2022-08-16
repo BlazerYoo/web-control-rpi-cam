@@ -2,6 +2,7 @@ import asyncio
 import websockets
 import os
 from gpiozero import Servo
+from gpiozero import PWMLED
 from gpiozero.pins.pigpio import PiGPIOFactory
 
 def init():
@@ -18,6 +19,10 @@ def init():
     panServo.value = panServoAngle
     tiltServo.value = tiltServoAngle
 
+    global led
+    led = PWMLED(22)
+    led.value = 0
+
 async def handler(websocket):
     async for message in websocket:
         #print(message)
@@ -25,6 +30,7 @@ async def handler(websocket):
         global tiltServo
         global panServoAngle
         global tiltServoAngle
+        #global led
         interval = 0.01
         if 'up' in message.lower():
             if (tiltServoAngle + interval) >= 1:
@@ -50,6 +56,10 @@ async def handler(websocket):
             else:
                 panServoAngle -= interval
             panServo.value = panServoAngle
+        elif 'ledon' in message.lower():
+            led.value = 0.75
+        elif 'ledoff' in message.lower():
+            led.value = 0
         elif 'power' in message.lower():
             await websocket.send("POWERING OFF...")
             os.system("sudo shutdown -h now")
