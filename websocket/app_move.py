@@ -31,6 +31,7 @@ def init():
     global led7
     global led8
     global led9
+    global led10
 
     led1 = PWMLED(22)
     led1.value = 0
@@ -50,6 +51,8 @@ def init():
     led8.value = 0
     led9 = PWMLED(26)
     led9.value = 0
+    led10 = PWMLED(16)
+    led10.value = 0
 
 
 async def handler(websocket):
@@ -68,6 +71,7 @@ async def handler(websocket):
         global led7
         global led8
         global led9
+        global led10
         interval = 0.01
         if 'up' in message.lower():
             if (tiltServoAngle + interval) >= 1:
@@ -103,6 +107,7 @@ async def handler(websocket):
             led7.value = 0
             led8.value = 0
             led9.value = 0
+            led10.value = 0
         elif 'lumin' in message.lower():
             lumin = int(message.split(" ")[1]) / 100
             led1.value = lumin
@@ -114,6 +119,7 @@ async def handler(websocket):
             led7.value = lumin
             led8.value = lumin
             led9.value = lumin
+            led10.value = lumin
         elif 'power' in message.lower():
             await websocket.send("POWERING OFF...")
             os.system("sudo shutdown -h now")
