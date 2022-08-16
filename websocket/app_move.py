@@ -57,9 +57,11 @@ async def handler(websocket):
                 panServoAngle -= interval
             panServo.value = panServoAngle
         elif 'ledon' in message.lower():
-            led.value = 0.75
+            led.value = 1
         elif 'ledoff' in message.lower():
             led.value = 0
+        elif 'lumin' in message.lower():
+            led.value = float(message.split(" ")[1])
         elif 'power' in message.lower():
             await websocket.send("POWERING OFF...")
             os.system("sudo shutdown -h now")

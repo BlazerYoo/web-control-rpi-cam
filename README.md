@@ -23,3 +23,7 @@ Open `client.html` on a browser on device in same local network as your Raspberr
 Setting up servo in `app_move.py` adapted from https://github.com/garyexplains/examples/blob/master/servo/sweep0.py
 
 Python websocket in `app_move.py` and `client.html` adapted from https://websockets.readthedocs.io/en/stable/intro/tutorial1.html and https://www.piesocket.com/blog/python-websocket
+
+https://www.w3schools.com/howto/howto_js_rangeslider.asp
+
+https://gpiozero.readthedocs.io/en/stable/recipes.html#led-with-variable-brightness

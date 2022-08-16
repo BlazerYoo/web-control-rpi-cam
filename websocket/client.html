@@ -1,14 +1,54 @@
 <!DOCTYPE html>
- 
+
 <html lang="en">
- 
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CAMERA</title>
+
+    <style>
+        .slidecontainer {
+            width: 100%;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 15px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+
+        .slider:hover {
+            opacity: 1;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #04AA6D;
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #04AA6D;
+            cursor: pointer;
+        }
+    </style>
 </head>
- 
+
 <body>
     <hr>
 
@@ -24,6 +64,10 @@
     <hr>
 
     <button id="light" onclick="toggleLight()">Light</button>
+    <div class="slidecontainer">
+        <input type="range" min="0" max="1" value="0.5" class="slider" id="slider">
+        <p>Brightness: <span id="lumin"></span></p>
+    </div>
 
     <hr>
 
@@ -32,7 +76,8 @@
     <hr>
 
     <!--Jquery Cdn -->
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 
     <script>
 
@@ -43,12 +88,12 @@
         const socket = new WebSocket(address);
 
         $('#feed').attr("src", "http://" + ip + "/video_feed")
-    
+
         // On open new client
         socket.addEventListener('open', function (event) {
             socket.send('Connection Established');
         });
-        
+
         // Receive messages
         socket.addEventListener('message', function (event) {
             console.log(event.data);
@@ -57,45 +102,60 @@
         // Set up light toggle inner text
         $('#light').text("LED OFF");
         let ledOn = false;
-    
+
         function up() {
+            console.log("sent: UP");
             socket.send("UP");
         }
 
         function down() {
+            console.log("sent: DOWN");
             socket.send("DOWN");
         }
 
         function left() {
+            console.log("sent: LEFT");
             socket.send("LEFT");
         }
 
         function right() {
+            console.log("sent: RIGHT");
             socket.send("RIGHT");
         }
 
         function power() {
+            console.log("sent: POWER");
             socket.send("POWER");
         }
 
         function toggleLight() {
             if (ledOn) {
-                socket.send("LEDon");
-                $('#light').text("LED OFF");
-            } else {
+                console.log("send: LEDoff");
                 socket.send("LEDoff");
-                $('#light').text("LED ON");
+                $('#light').text("LED is OFF");
+            } else {
+                console.log("send: LEDon");
+                socket.send("LEDon");
+                $('#light').text("LED is ON");
             }
             ledOn = !ledOn;
         }
-        
+
+        // Change LED brightness
+        const slider = document.getElementById("slider");
+        const output = document.getElementById("lumin");
+        slider.oninput = function() {
+            output.innerHTML = this.value;
+            socket.send("LUMIN: ", this.value)
+        }
+
         let interval = 100;
         let timeout = 0;
         let counter = 0;
         $('#up').mousedown(function () {
             timeout = setInterval(function () {
                 counter += 1;
-                console.log("holding " + counter);
+                console.log("UP holding " + counter);
                 socket.send("UP");
             }, interval);
         });
@@ -103,7 +163,7 @@
         $('#down').mousedown(function () {
             timeout = setInterval(function () {
                 counter += 1;
-                console.log("holding " + counter);
+                console.log("DOWN holding " + counter);
                 socket.send("DOWN");
             }, interval);
         });
@@ -111,7 +171,7 @@
         $('#left').mousedown(function () {
             timeout = setInterval(function () {
                 counter += 1;
-                console.log("holding " + counter);
+                console.log("LEFT holding " + counter);
                 socket.send("LEFT");
             }, interval);
         });
@@ -119,7 +179,7 @@
         $('#right').mousedown(function () {
             timeout = setInterval(function () {
                 counter += 1;
-                console.log("holding " + counter);
+                console.log("RIGHT holding " + counter);
                 socket.send("RIGHT");
             }, interval);
         });
@@ -129,8 +189,8 @@
             counter = 0;
             return false;
         });
-     
+
     </script>
 </body>
- 
+
 </html>
