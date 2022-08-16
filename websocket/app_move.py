@@ -30,7 +30,7 @@ async def handler(websocket):
         global tiltServo
         global panServoAngle
         global tiltServoAngle
-        #global led
+        global led
         interval = 0.01
         if 'up' in message.lower():
             if (tiltServoAngle + interval) >= 1:
@@ -61,7 +61,7 @@ async def handler(websocket):
         elif 'ledoff' in message.lower():
             led.value = 0
         elif 'lumin' in message.lower():
-            led.value = float(message.split(" ")[1])
+            led.value = int(message.split(" ")[1]) / 100
         elif 'power' in message.lower():
             await websocket.send("POWERING OFF...")
             os.system("sudo shutdown -h now")

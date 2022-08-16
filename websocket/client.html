@@ -65,7 +65,7 @@
 
     <button id="light" onclick="toggleLight()">Light</button>
     <div class="slidecontainer">
-        <input type="range" min="0" max="1" value="0.5" class="slider" id="slider">
+        <input type="range" min="0" max="100" value="50" class="slider" id="slider">
         <p>Brightness: <span id="lumin"></span></p>
     </div>
 
@@ -100,7 +100,7 @@
         });
 
         // Set up light toggle inner text
-        $('#light').text("LED OFF");
+        $('#light').text("LED is OFF");
         let ledOn = false;
 
         function up() {
@@ -128,25 +128,28 @@
             socket.send("POWER");
         }
 
+        // Toggle LED + change LED brightness
+        const slider = document.getElementById("slider");
+        const output = document.getElementById("lumin");
+
         function toggleLight() {
             if (ledOn) {
                 console.log("send: LEDoff");
                 socket.send("LEDoff");
                 $('#light').text("LED is OFF");
             } else {
-                console.log("send: LEDon");
-                socket.send("LEDon");
+                console.log("send: LUMIN " + slider.value);
+                socket.send("LUMIN: ", slider.value)
                 $('#light').text("LED is ON");
             }
             ledOn = !ledOn;
         }
 
-        // Change LED brightness
-        const slider = document.getElementById("slider");
-        const output = document.getElementById("lumin");
-        slider.oninput = function() {
+        slider.oninput = function () {
             output.innerHTML = this.value;
-            socket.send("LUMIN: ", this.value)
+            if (document.getElementById("lumin").innerText == "LED is ON") {
+                socket.send("LUMIN: ", this.value)
+            }
         }
 
         let interval = 100;
