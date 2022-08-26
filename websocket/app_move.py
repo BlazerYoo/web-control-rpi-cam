@@ -32,6 +32,7 @@ def init():
     global led8
     global led9
     global led10
+    global powerLed
 
     led1 = PWMLED(22)
     led1.value = 0
@@ -53,6 +54,8 @@ def init():
     led9.value = 0
     led10 = PWMLED(16)
     led10.value = 0
+    powerLed = PWMLED(21)
+    powerLed.value = 1
 
 
 async def handler(websocket):
